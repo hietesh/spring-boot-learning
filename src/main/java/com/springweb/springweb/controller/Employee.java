@@ -5,7 +5,6 @@ import com.springweb.springweb.services.EmployeeService;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -14,8 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping(path = "/employee")
 public class Employee {
 
-    @Autowired
-    EmployeeService employeeService;
+    private final EmployeeService employeeService;
+
+    Employee(EmployeeService employeeService){
+        this.employeeService = employeeService;
+    }
 
     @GetMapping(path="/{employeeId}")
     EmployeeDTO showEmployee(@PathVariable(name = "employeeId") Long id) {
